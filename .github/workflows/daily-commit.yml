@@ -15,11 +15,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Make daily contribution
+      - name: Make daily contributions
         run: |
-          echo "Automated contribution on $(date)" >> contribution.log
           git config --global user.name 'Sandept'
           git config --global user.email 'san.dept008@gmail.com'
-          git add contribution.log
-          git commit -m "chore: automate daily contribution"
+          
+          # Generate a random number of commits between 5 and 15 to make it look natural and dark green
+          NUM_COMMITS=$((RANDOM % 11 + 5))
+          
+          for i in $(seq 1 $NUM_COMMITS)
+          do
+            echo "Automated contribution $i on $(date)" >> contribution.log
+            git add contribution.log
+            git commit -m "chore: automate daily contribution $i"
+          done
+          
           git push
