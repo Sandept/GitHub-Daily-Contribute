@@ -1,0 +1,25 @@
+name: Daily Contribution
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
+  workflow_dispatch: # Allows you to manually trigger it from the Actions tab
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make daily contribution
+        run: |
+          echo "Automated contribution on $(date)" >> contribution.log
+          git config --global user.name 'Sandept'
+          git config --global user.email 'san.dept008@gmail.com'
+          git add contribution.log
+          git commit -m "chore: automate daily contribution"
+          git push
