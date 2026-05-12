@@ -21,7 +21,7 @@ jobs:
           git config --global user.email 'san.dept008@gmail.com'
           
           # Generate a random number of commits between 5 and 15 to make it look natural and dark green
-          NUM_COMMITS=$((RANDOM % 22 + 5))
+          NUM_COMMITS=$((RANDOM % 15 + 5))
           
           for i in $(seq 1 $NUM_COMMITS)
           do
